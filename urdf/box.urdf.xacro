@@ -4,6 +4,9 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot  name="box" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:arg name="scale" default="1.0"/>
+  <xacro:property name="sc" value="$(arg scale)"/>
+
   <xacro:macro name="body_color">
     <visual>
       <material>
@@ -47,7 +50,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/box/base_link.STL" />
+          filename="package://conveyor_belt/meshes/box/base_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
       <material
         name="">
@@ -61,7 +65,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/box/base_link.STL" />
+          filename="package://conveyor_belt/meshes/box/base_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
     </collision>
   </link>
@@ -87,7 +92,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/box/lid_link.STL" />
+          filename="package://conveyor_belt/meshes/box/lid_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
       <material
         name="">
@@ -101,7 +107,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/box/lid_link.STL" />
+          filename="package://conveyor_belt/meshes/box/lid_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
     </collision>
   </link>
@@ -109,7 +116,7 @@
     name="lid_joint"
     type="fixed">
     <origin
-      xyz="0.018291 0.015197 0.16816"
+      xyz="${0.018291 * sc} ${0.015197 * sc} ${0.16816 * sc}"
       rpy="-1.5708 0 3.1416" />
     <parent
       link="base_link" />

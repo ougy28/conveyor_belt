@@ -17,7 +17,7 @@ def main():
 
     # Position and orientation
     # [X, Y, Z]
-    position = [-0.8, 0.0, 1.2]
+    position = [-0.2, -0.3, 1.2]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
     # Base Name or robot
@@ -47,8 +47,8 @@ def main():
 
    
 
-    # Set data for request
-    robot_desc = xacro.process(sdf_file_path)
+    # Set data for request — scale=0.1 matches the conveyor belt scale
+    robot_desc = xacro.process(sdf_file_path, mappings={'scale': '0.1'})
 
     request = SpawnEntity.Request()
     request.name = robot_base_name + entity_name
@@ -73,8 +73,8 @@ def main():
     request2.name = robot_base_name + entity_name2
     request2.xml = robot_desc
     request2.robot_namespace = entity_name2
-    request2.initial_pose.position.x = 0.8
-    request2.initial_pose.position.y = 0.0
+    request2.initial_pose.position.x = 0.2
+    request2.initial_pose.position.y = 1.0
     request2.initial_pose.position.z = 1.2
 
     node.get_logger().info("Sending service request to `/spawn_entity` for second box")
