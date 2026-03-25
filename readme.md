@@ -52,6 +52,15 @@ colcon build --packages-select conveyor_belt
 ```bash
 ros2 launch conveyor_belt robot.launch.py
 ```
+### Run the conveyor
+```bash
+ ros2 topic pub /conveyor_power std_msgs/msg/Bool "data: true" -1
+```
+
+### Stop the conveyor
+```bash
+ ros2 topic pub /conveyor_power std_msgs/msg/Bool "data: false" -1
+```
 
 ### Spawn Object
 

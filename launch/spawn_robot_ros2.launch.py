@@ -25,7 +25,7 @@ def generate_launch_description():
     # [X, Y, Z]
     position = [0.0, 0.0, 0.8]
     # [Roll, Pitch, Yaw]
-    orientation = [0.0, 0.0, 0.0]
+    orientation = [0.0, 0.0, 1.5708]
     # Base Name or robot
     robot_base_name = "belt"
     ####### DATA INPUT END ##########
@@ -39,8 +39,8 @@ def generate_launch_description():
         robot_desc_path = os.path.join(get_package_share_directory(
             package_description), "urdf", xacro_file)
 
-    robot_desc = xacro.process_file(robot_desc_path)
-    xml = robot_desc.toxml()
+    robot_desc = xacro.process(robot_desc_path)
+    xml = robot_desc
 
     entity_name = robot_base_name+"-"+str(random.random())
 

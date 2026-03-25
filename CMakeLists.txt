@@ -22,7 +22,6 @@ find_package(gazebo REQUIRED)
 find_package(gazebo_ros REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(robot_state_publisher REQUIRED)
-find_package(xacro REQUIRED)
 
 # Install All Directories
 install(DIRECTORY
@@ -55,6 +54,8 @@ add_library(conveyor_belt_plugin SHARED
 target_include_directories(conveyor_belt_plugin PUBLIC include)
 ament_target_dependencies(conveyor_belt_plugin
   "gazebo_ros"
+  "rclcpp"
+  "std_msgs"
 )
 ament_export_libraries(conveyor_belt_plugin)
 
