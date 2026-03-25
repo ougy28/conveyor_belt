@@ -78,7 +78,12 @@ void ConveyorBeltPlugin::Load(gazebo::physics::ModelPtr model, sdf::ElementPtr s
   impl_->ros_node_ = gazebo_ros::Node::Get(sdf);
 
 
-  impl_->power_subscriber = impl_->ros_node_->create_subscription<std_msgs::msg::Bool>("conveyor_power", 
+  std::string topic = "conveyor_power";
+  if (sdf->HasElement("topic")) {
+    topic = sdf->GetElement("topic")->Get<std::string>();
+  }
+
+  impl_->power_subscriber = impl_->ros_node_->create_subscription<std_msgs::msg::Bool>(topic,
     10, std::bind(&ConveyorBeltPluginPrivate::OnPower, impl_.get(), std::placeholders::_1));
 
 
@@ -118,8 +123,8 @@ void ConveyorBeltPluginPrivate::OnUpdate()
   // Get the current position of the belt
   double belt_position = belt_joint_->Position(0);
 
-  // Set the Position of the belt to 0 if it exceeds the Upper Limit
-  if (belt_position >= limit_){
+  // Reset position when the belt reaches either limit (loops the animation)
+  if (belt_position >= belt_joint_->UpperLimit() || belt_position <= belt_joint_->LowerLimit()) {
     belt_joint_->SetPosition(0, 0);
   }
 

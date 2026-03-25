@@ -4,6 +4,9 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot  name="conveyor_belt" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:arg name="namespace" default="belt1"/>
+  <xacro:arg name="max_velocity" default="0.3"/>
+
 
   <xacro:macro name="body_color">
     <visual>
@@ -120,7 +123,7 @@
     <axis
       xyz="-1 0 0" />
     <limit
-      lower="0"
+      lower="-0.01"
       upper="0.01"
       effort="0"
       velocity="10" />
@@ -138,8 +141,9 @@
 
 <!-- Custom Gazebo Plugin for Conveyor Belt  -->
   <gazebo>
-  <plugin filename="libconveyor_belt_plugin.so" name="conveyor_belt_plugin">
-        <max_velocity>0.3</max_velocity> 
+  <plugin filename="libconveyor_belt_plugin.so" name="$(arg namespace)_conveyor_belt_plugin">
+        <max_velocity>$(arg max_velocity)</max_velocity>
+        <topic>/$(arg namespace)/conveyor_power</topic>
   </plugin>
   </gazebo>
 

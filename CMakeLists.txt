@@ -41,6 +41,7 @@ install(DIRECTORY
 install(
     PROGRAMS
     launch/robot_description_publisher.py
+    launch/two_belts.launch.py
     scripts/spawn_object.py
     DESTINATION lib/${PROJECT_NAME}
     )
