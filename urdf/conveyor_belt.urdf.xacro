@@ -6,6 +6,8 @@
 
   <xacro:arg name="namespace" default="belt1"/>
   <xacro:arg name="max_velocity" default="0.3"/>
+  <xacro:arg name="scale" default="0.25"/>
+  <xacro:property name="sc" value="$(arg scale)"/>
 
 
   <xacro:macro name="body_color">
@@ -52,7 +54,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/base_link.STL" />
+          filename="package://conveyor_belt/meshes/base_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
       <material
         name="">
@@ -66,7 +69,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/base_link.STL" />
+          filename="package://conveyor_belt/meshes/base_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
     </collision>
   </link>
@@ -74,7 +78,7 @@
     name="belt_link">
     <inertial>
       <origin
-        xyz="2.84 0.00499999999999995 2.76334119905601E-17"
+        xyz="${2.84 * sc} ${0.005 * sc} 0"
         rpy="0 0 0" />
       <mass
         value="56.8" />
@@ -92,7 +96,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/belt_link.STL" />
+          filename="package://conveyor_belt/meshes/belt_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
       <material
         name="">
@@ -106,7 +111,8 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://conveyor_belt/meshes/belt_link.STL" />
+          filename="package://conveyor_belt/meshes/belt_link.STL"
+          scale="${sc} ${sc} ${sc}" />
       </geometry>
     </collision>
   </link>
@@ -114,7 +120,7 @@
     name="belt_joint"
     type="prismatic">
     <origin
-      xyz="-2.83 0 0.3"
+      xyz="${-2.83 * sc} 0 ${0.3 * sc}"
       rpy="1.5708 0 0" />
     <parent
       link="base_link" />
