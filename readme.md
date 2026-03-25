@@ -41,7 +41,7 @@ git clone https://github.com/shantanuparabumd/conveyor_belt.git
 **Resolve Dependencies**
 ```bash
 cd ..
-rosdep install -i --from-path src --rosdistro galactic -y
+rosdep install -i --from-path src --rosdistro humble -y
 ```
 
 ```bash
